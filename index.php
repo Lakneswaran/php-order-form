@@ -18,7 +18,7 @@ function whatIsHappening() {
 
 whatIsHappening();
 //your products with their price.
-$products = [
+$food = [
     ['name' => 'Club Ham', 'price' => 3.20],
     ['name' => 'Club Cheese', 'price' => 3],
     ['name' => 'Club Cheese & Ham', 'price' => 4],
@@ -26,7 +26,7 @@ $products = [
     ['name' => 'Club Salmon', 'price' => 5]
 ];
 
-$products = [
+$drinks = [
     ['name' => 'Cola', 'price' => 2],
     ['name' => 'Fanta', 'price' => 2],
     ['name' => 'Sprite', 'price' => 2],
@@ -35,19 +35,54 @@ $products = [
 
 $totalValue = 0;
 
-require 'form-view.php';
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-  $emailErr = "Invalid email format";
+
+$name = $email = $street = $streetnumber = $city = $zipcode = "";
+$emailErr = $streetErr = $streetnumberErr = $cityErr = $zipcodeErr = "";
+
+
+// var_dump($email);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+$email = test_input($_POST["email"]);
+$street = test_input($_POST["street"]);
+$streetnumber = test_input($_POST["streetnumber"]);
+$city = test_input($_POST["city"]);
+$zipcode = test_input($_POST["zipcode"]);
+
+if (empty($_POST["email"])) {
+    $emailErr = "E-mail is required";
+}
+else if (!preg_match("/^[a-zA-Z-' ]*$/",$email)) {
+    $emailErr = "Only letters and white space allowed";
+  }
+
+else {
+    $email = $_POST["email"];
 }
 
-$email = $_POST["email"];
-$street = $_POST["street"];
-$streetnumber = $_POST["streetnumber"];
-$city = $_POST["city"];
-$zipcode = $_POST["zipcode"];
-echo $email;             // working
+if (empty($_POST["street"])) {
+    $nameErr = "street is required";
+  } else {
+    $street = $_POST["street"];
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$street)) {
+      $streetErr = "Only letters and white space allowed";
+    }
+  }
+
+}
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+
+
+require_once 'form-view.php';
 
 
 
-?>
