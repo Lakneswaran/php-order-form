@@ -55,20 +55,24 @@
                 <div class="form-group col-md-6">
                     <label for="street">Street:</label>
                     <input type="text" name="street" id="street" class="form-control">
+                    <span>*<?php echo $streetErr; ?></span>
                 </div>
                 <div class="form-group col-md-6" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                     <label for="streetnumber">Street number:</label>
                     <input type="text" id="streetnumber" name="streetnumber" class="form-control">
+                    <span>*<?php echo $streetnumberErr; ?></span>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>p" method="post">
                     <label for="city">City:</label>
                     <input type="text" id="city" name="city" class="form-control">
+                    <span>*<?php echo $cityErr; ?></span>
                 </div>
                 <div class="form-group col-md-6" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                     <label for="zipcode">Zipcode</label>
                     <input type="text" id="zipcode" name="zipcode" class="form-control">
+                    <span>*<?php echo $zipcodeErr; ?></span>
                 </div>
             </div>
         </fieldset>
