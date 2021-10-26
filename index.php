@@ -54,11 +54,15 @@ $zipcode = test_input($_POST["zipcode"]);
 
 if (empty($_POST["email"])) {
     $emailErr = "email is required";
-  } else {
+  } else {      
     $email = $_POST["email"];
     // check if name only contains letters and whitespace
     if (!preg_match("/^[a-zA-Z\d\._ ]+@[a-zA-Z\d\._]+\.[a-zA-Z\d\._]{2,}+$/",$email)) {
       $emailErr = "Enter a valid email";
+    }else{
+        $email = $_POST["email"];
+        $_SESSION["email"]=$_POST["email"];  
+
     }
   }
 
