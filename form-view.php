@@ -43,7 +43,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
-                <input type="text" id="email" name="email" class="form-control" value="<?php echo $email; ?>"/>
+                <input type="text" id="email" name="email" class="form-control" value="<?php echo isset($_POST["email"]) ? $_POST["email"] : $products; ?>"/>
                 <span>*<?php echo $emailErr; ?></span>
             </div>
         </div>
@@ -54,24 +54,24 @@
             <div class="form-row" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                 <div class="form-group col-md-6">
                     <label for="street">Street:</label>
-                    <input type="text" name="street" id="street" class="form-control">
+                    <input type="text" name="street" id="street" class="form-control" value="<?php echo $street; ?>">
                     <span>*<?php echo $streetErr; ?></span>
                 </div>
                 <div class="form-group col-md-6" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                     <label for="streetnumber">Street number:</label>
-                    <input type="text" id="streetnumber" name="streetnumber" class="form-control">
+                    <input type="text" id="streetnumber" name="streetnumber" class="form-control" value="<?php echo $streetnumber; ?>">
                     <span>*<?php echo $streetnumberErr; ?></span>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>p" method="post">
                     <label for="city">City:</label>
-                    <input type="text" id="city" name="city" class="form-control">
+                    <input type="text" id="city" name="city" class="form-control" value="<?php echo $city; ?>">
                     <span>*<?php echo $cityErr; ?></span>
                 </div>
                 <div class="form-group col-md-6" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                     <label for="zipcode">Zipcode</label>
-                    <input type="text" id="zipcode" name="zipcode" class="form-control">
+                    <input type="text" id="zipcode" name="zipcode" class="form-control" value="<?php echo $zipcode; ?>">
                     <span>*<?php echo $zipcodeErr; ?></span>
                 </div>
             </div>
@@ -79,20 +79,20 @@
 
         <fieldset>
             <legend>Products</legend>
-            <?php if(isset($_GET['food']) && $_GET['food'] == 1) {
-                foreach ($food AS $i => $food): ?>
-                 <label>
-                    <input type="checkbox" value="1" name="products[<?php echo $i ?>]"/> <?php echo $food['name'] ?> -
-                    &euro; <?php echo number_format($food['price'], 2) ?>
-                </label><br />
-                <?php endforeach; 
+            <?php if(isset($_GET['food']) && $_GET['food'] == 0) {
+              foreach ($drinks AS $i => $drink): ?>
+                <label>
+                   <input type="checkbox" value="1" name="products[<?php echo $i ?>]"/> <?php echo $drink['name'] ?> -
+                   &euro; <?php echo number_format($drink['price'], 2) ?>
+               </label><br />
+               <?php endforeach; 
             } else {
-                foreach ($drinks AS $i => $drink): ?>
-                    <label>
-                       <input type="checkbox" value="1" name="products[<?php echo $i ?>]"/> <?php echo $drink['name'] ?> -
-                       &euro; <?php echo number_format($drink['price'], 2) ?>
-                   </label><br />
-                   <?php endforeach; 
+                      foreach ($food AS $i => $food): ?>
+                        <label>
+                           <input type="checkbox" value="1" name="products[<?php echo $i ?>]"/> <?php echo $food['name'] ?> -
+                           &euro; <?php echo number_format($food['price'], 2) ?>
+                       </label><br />
+                       <?php endforeach; 
             }
 
             ?>

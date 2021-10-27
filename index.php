@@ -73,6 +73,9 @@ if (empty($_POST["street"])) {
     // check if name only contains letters and whitespace
     if (!preg_match("/^[a-zA-Z-' ]*$/",$street)) {
       $streetErr = "Only letters and white space allowed";
+    }else{
+        $street = $_POST["street"];
+        $_SESSION["street"]=$_POST["street"];  
     }
   }
 
@@ -83,6 +86,9 @@ if (empty($_POST["street"])) {
     // check if name only contains letters and whitespace
     if (!preg_match("/^[a-zA-Z-' ]*$/",$city)) {
       $cityErr = "Only letters and white space allowed";
+    }else{
+        $city = $_POST["city"];
+        $_SESSION["city"]=$_POST["city"];  
     }
   }
 
@@ -93,6 +99,9 @@ if (empty($_POST["street"])) {
     // check if name only contains letters and whitespace
     if (!preg_match("/^[0-9]+$/",$streetnumber)) {
       $streetnumberErr = "Only numbers allowed";
+    }else{
+        $streetnumber = $_POST["streetnumber"];
+        $_SESSION["streetnumber"]=$_POST["streetnumber"];  
     }
   }
   if (empty($_POST["zipcode"])) {
@@ -102,6 +111,9 @@ if (empty($_POST["street"])) {
     // check if name only contains letters and whitespace
     if (!preg_match("/^[0-9]+$/",$zipcode)) {
       $zipcodeErr = "Only numbers allowed";
+    }else{
+        $zipcode = $_POST["zipcode"];
+        $_SESSION["zipcode"]=$_POST["zipcode"];  
     }
   }
 
