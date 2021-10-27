@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 //we are going to use session variables so we need to enable sessions
 session_start();
+// setcookie("prices", strval($totalValue), time() + (86400 * 30), "/");
 
 function whatIsHappening() {
     echo '<h2>$_GET</h2>';
@@ -32,8 +33,12 @@ $drinks = [
     ['name' => 'Sprite', 'price' => 2],
     ['name' => 'Ice-tea', 'price' => 3],
 ];
-
+if(isset($_COOKIE["prices"])){
+    $totalValue = $_COOKIE["prices"];
+}else{
 $totalValue = 0;
+
+}
 $products = $food;
 if(isset($_GET["food"]) && $_GET["food"] == 0) {
     $products = $drinks;
@@ -42,20 +47,34 @@ $order = [];
 
 if(isset($_POST['product']) && !empty($_POST['product'])) {
     foreach ($_POST['product'] as $i => $value) {
+        global $totalValue;
         $selected = explode("|-|",$value);
         $order[$i]['price'] = $selected[0];
         $order[$i]['name'] = $selected[1];
-        $intprice = (int)$selected[0];
+        $intprice = (float)$selected[0];
         $totalValue += $intprice;
         
+        setcookie("prices", strval($totalValue), time() + (86400 * 30), "/");
+        
     }
-    var_dump($totalValue);
-
-    
-
- 
-
+    if(isset($_POST['express_delivery'])){
+        $totalValue += $_POST['express_delivery'];
+        echo "<div class='alert alert-success' role='alert'>
+        Delivery will be in 45min!
+      </div>";
+      
+    }else{
+        echo "<div class='alert alert-success' role='alert'>
+        Delivery will be in 2hours!
+      </div>";
+    }
+ }else{
+    $totalValue  = $_COOKIE["prices"];
 }
+
+
+
+
 
 
 
@@ -149,8 +168,10 @@ function test_input($data) {
     return $data;
   }
 
+  
+
 
 require_once 'form-view.php';
-
+whatIsHappening();
 
 
