@@ -43,7 +43,8 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
-                <input type="text" id="email" name="email" class="form-control" value="<?php echo isset($_POST["email"]) ? $_POST["email"] : $products; ?>"/>
+                <input type="text" id="email" name="email" class="form-control" value="<?php if(isset($_SESSION['email']))
+                {echo $_SESSION['email'];}?>"/>
                 <span>*<?php echo $emailErr; ?></span>
             </div>
         </div>
@@ -54,24 +55,28 @@
             <div class="form-row" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                 <div class="form-group col-md-6">
                     <label for="street">Street:</label>
-                    <input type="text" name="street" id="street" class="form-control" value="<?php echo $street; ?>">
+                    <input type="text" name="street" id="street" class="form-control" value="<?php if(isset($_SESSION['street']))
+                {echo $_SESSION['street'];}?>"/>
                     <span>*<?php echo $streetErr; ?></span>
                 </div>
                 <div class="form-group col-md-6" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                     <label for="streetnumber">Street number:</label>
-                    <input type="text" id="streetnumber" name="streetnumber" class="form-control" value="<?php echo $streetnumber; ?>">
+                    <input type="text" id="streetnumber" name="streetnumber" class="form-control" value="<?php if(isset($_SESSION['streetnumber']))
+                {echo $_SESSION['streetnumber'];}?>"/>
                     <span>*<?php echo $streetnumberErr; ?></span>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>p" method="post">
                     <label for="city">City:</label>
-                    <input type="text" id="city" name="city" class="form-control" value="<?php echo $city; ?>">
+                    <input type="text" id="city" name="city" class="form-control" value="<?php if(isset($_SESSION['city']))
+                {echo $_SESSION['city'];}?>"/>
                     <span>*<?php echo $cityErr; ?></span>
                 </div>
                 <div class="form-group col-md-6" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                     <label for="zipcode">Zipcode</label>
-                    <input type="text" id="zipcode" name="zipcode" class="form-control" value="<?php echo $zipcode; ?>">
+                    <input type="text" id="zipcode" name="zipcode" class="form-control" value="<?php if(isset($_SESSION['zipcode']))
+                {echo $_SESSION['zipcode'];}?>"/>
                     <span>*<?php echo $zipcodeErr; ?></span>
                 </div>
             </div>
@@ -79,23 +84,12 @@
 
         <fieldset>
             <legend>Products</legend>
-            <?php if(isset($_GET['food']) && $_GET['food'] == 0) {
-              foreach ($drinks AS $i => $drink): ?>
+            <?php foreach ($products as $i => $product) { ?>
                 <label>
-                   <input type="checkbox" value="1" name="products[<?php echo $i ?>]"/> <?php echo $drink['name'] ?> -
-                   &euro; <?php echo number_format($drink['price'], 2) ?>
-               </label><br />
-               <?php endforeach; 
-            } else {
-                      foreach ($food AS $i => $food): ?>
-                        <label>
-                           <input type="checkbox" value="1" name="products[<?php echo $i ?>]"/> <?php echo $food['name'] ?> -
-                           &euro; <?php echo number_format($food['price'], 2) ?>
-                       </label><br />
-                       <?php endforeach; 
-            }
-
-            ?>
+                <input type="checkbox" value="<?php echo $product['price']; ?>|-|<?php echo $product['name']; ?>" name="product[]"/> <?php echo $product['name'] ?> -
+                &euro; <?php echo number_format($product['price'], 2) ?>
+            </label><br>
+            <?php } ?>
         </fieldset>
         
         <label>

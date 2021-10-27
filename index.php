@@ -16,7 +16,7 @@ function whatIsHappening() {
     var_dump($_SESSION);
 }
 
-whatIsHappening();
+// whatIsHappening();
 //your products with their price.
 $food = [
     ['name' => 'Club Ham', 'price' => 3.20],
@@ -34,6 +34,29 @@ $drinks = [
 ];
 
 $totalValue = 0;
+$products = $food;
+if(isset($_GET["food"]) && $_GET["food"] == 0) {
+    $products = $drinks;
+}
+$order = [];
+
+if(isset($_POST['product']) && !empty($_POST['product'])) {
+    foreach ($_POST['product'] as $i => $value) {
+        $selected = explode("|-|",$value);
+        $order[$i]['price'] = $selected[0];
+        $order[$i]['name'] = $selected[1];
+        $intprice = (int)$selected[0];
+        $totalValue += $intprice;
+        
+    }
+    var_dump($totalValue);
+
+    
+
+ 
+
+}
+
 
 
 
