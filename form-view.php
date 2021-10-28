@@ -96,6 +96,8 @@
             <input type="checkbox" name="express_delivery" value="5" /> 
             Express delivery (+ 5 EUR) 
         </label>
+
+
             
         <button type="submit" class="btn btn-primary">Order!</button>
     </form>
@@ -103,7 +105,11 @@
     <footer>You already ordered <strong>&euro; <?php echo $totalValue; ?></strong> in food and drinks.</footer>
 </div>
 
+<?php
 
+echo  $selected[0] . "<br>" .$name ."<br>". $email ."<br>" . $street ."<br>" . $streetnumber ."<br>" . $city."<br>" . $zipcode ."<br>" . $totalValue;
+
+?>
 <style>
     footer {
         text-align: center;

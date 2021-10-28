@@ -55,13 +55,14 @@ if(isset($_POST['product']) && !empty($_POST['product'])) {
         $totalValue += $intprice;
         
         setcookie("prices", strval($totalValue), time() + (86400 * 30), "/");
-        
+        echo $selected[1];
     }
     if(isset($_POST['express_delivery'])){
         $totalValue += $_POST['express_delivery'];
         echo "<div class='alert alert-success' role='alert'>
         Delivery will be in 45min!
       </div>";
+      echo '<span class="align-baseline">baseline</span>';
       
     }else{
         echo "<div class='alert alert-success' role='alert'>
@@ -167,11 +168,24 @@ function test_input($data) {
     $data = htmlspecialchars($data);
     return $data;
   }
+//   ini_set('sendmail_from', "lakneswaran.krishnan@outlook.com");
+//   $to      = 'lakneswarankrishnan@gmail.com';
+//   $subject = 'Order successfully';
+//   $message = 'Paid';
+//   $headers = 'From: lakneswaran.krishnan@outlook.com' . "\r\n";
+     
 
-  
+//   $result = mail($to, $subject, $message, $headers); 
 
+//   if($result ==true){
+//       echo  $selected[0] .$name . $email . $street . $streetnumber . $city . $zipcode . $totalValue;
+//   }
+//   else{
+//       echo "failed order";
+//   }
 
+//   echo  $selected[0] . "<br>" .$name ."<br>". $email ."<br>" . $street ."<br>" . $streetnumber ."<br>" . $city."<br>" . $zipcode ."<br>" . $totalValue;
 require_once 'form-view.php';
-whatIsHappening();
+
 
 
